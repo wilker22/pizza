@@ -41,9 +41,35 @@
                                             <td>{{$pizza->large_pizza_price}}</td>
                                             <td>
                                                 <a href="{{ route('pizza.edit', $pizza->id) }}"><button class="btn btn-primary">Editar</button></a>
-                                                <a href="{{ route('pizza.destroy', $pizza->id) }}"><button class="btn btn-danger">Remover</button></a>
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{$pizza->id}}">Remover</button>
                                             </td>
-                                     </tr>
+                
+                                            <!-- Modal -->
+                                            
+                                                <div class="modal fade" id="exampleModal{{$pizza->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <form action="{{route('pizza.destroy', $pizza->id)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Confirmar a Remoção</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            Tem certeza que deseja remover o item!?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                            <button type="submit" class="btn btn-danger">Remover</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            
+                                            
+                                   </tr>
                                 @endforeach
                             @else    
                                     <p>Não existem pizzas cadastradas!</p>
@@ -51,7 +77,7 @@
                                 
                         </tbody>
                     </table>
-                    
+                    {{ $pizzas->links() }}
                 </div>
             </div>
         </div>

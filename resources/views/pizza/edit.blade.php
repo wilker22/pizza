@@ -27,7 +27,9 @@
                        </div>
                        <div class="form-group">
                             <label for="description">Descrição da Pizza</label>
-                            <textarea name="description" id="" cols="30" rows="10" class="form-control" placeholder="Descrição dos ingredientes" value="{{$pizza->description}}"></textarea>
+                            <textarea name="description" id="" cols="30" rows="10" class="form-control" placeholder="Descrição dos ingredientes">
+                                {{$pizza->description}}
+                            </textarea>
                         </div>
                         <div class="form-inline">
                             <label>Preço(R$)</label>
