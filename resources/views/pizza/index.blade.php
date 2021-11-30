@@ -5,8 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Pizzas') }}</div>
-
+                <div class="card-header">
+                    {{ __('Pizzas') }}
+                    <a href="{{ route('pizza.create') }}">
+                        <button class="btn btn-success" style="float: right">Adiconar Pizza</button>
+                    </a>
+                </div>
+                
                 <div class="card-body">
                     @if (session('message'))
                         <div class="alert alert-success" role="alert">
@@ -77,10 +82,12 @@
                                 
                         </tbody>
                     </table>
-                    {{ $pizzas->links() }}
-                </div>
+                    {{$pizzas->links()}}
+
+             </div>
             </div>
         </div>
     </div>
+
 </div>
 @endsection
