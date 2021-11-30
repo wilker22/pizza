@@ -3,56 +3,55 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Menu') }}</div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <a href="" class="list-group-item list-group-action">View</a>
-                        <a href="" class="list-group-item list-group-action">Create</a>        
-                    </ul>                     
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Pizza') }}</div>
+                <div class="card-header">{{ __('Pizzas') }}</div>
 
                 <div class="card-body">
-                   <form action="" method="post">
-                       <div class="form-group">
-                           <label for="name">Nome da Pizza</label>
-                           <input type="text" name="name" class="form-control" placeholder="Nome da pizza">
-                       </div>
-                       <div class="form-group">
-                            <label for="description">Descrição da Pizza</label>
-                            <textarea name="description" id="" cols="30" rows="10" class="form-control" placeholder="Descrição dos ingredientes"></textarea>
+                    @if (session('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('message') }}
                         </div>
-                        <div class="form-inline">
-                            <label>Preço(R$)</label>
-                            <input type="number" class="form-control" placeholder="Preço da pizza pequena">
-                            <input type="number" class="form-control" placeholder="Preço da pizza média">
-                            <input type="number" class="form-control" placeholder="Preço da pizza grande">
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Categorias</label>
-                            <select name="" id="" class="form-control">
-                                <option value="vegetariana">Vegetariana</option>
-                                <option value="tradicional">Tradicional</option>
-                                <option value="nonvegetarian">Não Vegetariana</option>
-                                <option value=""></option>
-
-                            </select>
-
-                            <div class="form-group">
-                                <label for="image">Imagem</label>
-                                <input type="file" name="image" id="image" class="form-control">
-                            </div>
-                            <div class="form-group text-center">
-                                <button type="submit" class="btn btn-lg btn-primary">Cadastrar Pizza</button>
-                            </div>
-                   </form>
-
+                    @endif
+                    
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <th>#</th>
+                            <th>Imagem</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Descrição</th>
+                            <th>Preço da Pequena</th>
+                            <th>Preço da Média</th>
+                            <th>Preço da Grande</th>
+                            <th>Ações</th>
+                            
+                        </thead>
+                        <tbody>
+                            @if (count($pizzas) > 0)
+                                @foreach($pizzas as $pizza)
+                                    <tr class="text-center">
+                                            <td>{{$pizza->id}}</td>
+                                            <td><img src="{{url('/')}}{{Storage::url($pizza->image)}}" width="80" alt=""></td>
+                                            <td>{{$pizza->name}}</td>
+                                            <td>{{$pizza->category}}</td>
+                                            <td>{{$pizza->description}}</td>
+                                            <td>{{$pizza->small_pizza_price}}</td>
+                                            <td>{{$pizza->medium_pizza_price}}</td>
+                                            <td>{{$pizza->large_pizza_price}}</td>
+                                            <td>
+                                                <a href="{{ route('pizza.edit', $pizza->id) }}"><button class="btn btn-primary">Editar</button></a>
+                                                <a href="{{ route('pizza.destroy', $pizza->id) }}"><button class="btn btn-danger">Remover</button></a>
+                                            </td>
+                                     </tr>
+                                @endforeach
+                            @else    
+                                    <p>Não existem pizzas cadastradas!</p>
+                            @endif
+                                
+                        </tbody>
+                    </table>
+                    
                 </div>
             </div>
         </div>

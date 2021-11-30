@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PizzaStoreRequest;
+use App\Http\Requests\PizzaUpdateRequest;
+use App\Models\Pizza;
 use Illuminate\Http\Request;
 
 class PizzaController extends Controller
@@ -13,7 +16,8 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        return view('pizza.index');
+        $pizzas = Pizza::all();
+        return view('pizza.index', compact('pizzas'));
     }
 
     /**
@@ -23,7 +27,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pizza.create');
     }
 
     /**
@@ -32,9 +36,17 @@ class PizzaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PizzaStoreRequest $request)
     {
-        //
+        $pizza = new Pizza(); 
+        $path = $request->image->store('public/pizza');
+        $data = $request->all();
+        $data['image'] = $path;
+               
+
+        $pizza->create($data);
+
+        return redirect()->route('pizza.index')->with('message', 'Pizza gravada com sucesso!');
     }
 
     /**
@@ -56,7 +68,8 @@ class PizzaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pizza = Pizza::find($id);
+        return view('pizza.edit', compact('pizza'));
     }
 
     /**
@@ -66,9 +79,23 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PizzaUpdateRequest $request, $id)
     {
-        //
+        $pizza = Pizza::findOrFail($id);
+        
+        if($request->has('image')){
+            $path = $request->image->store('public/pizza');
+        }else{
+            $path = $pizza->image;
+        }
+       
+        $data = $request->all();
+        $data['image'] = $path;
+        $pizza->update($data);
+
+        return redirect()->route('pizza.index')->with('message', 'Pizza Alterada com sucesso');
+
+        
     }
 
     /**
