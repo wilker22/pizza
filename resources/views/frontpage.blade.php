@@ -23,10 +23,23 @@
                 <div class="card-header">{{ __('Pizza') }}</div>
 
                 <div class="card-body">
-                    <div class="col-md-4">
-                        <p>Nome</p>
-                        <p>Descrição</p>
+                    <div class="row">
+                        @forelse ($pizzas as $pizza)
+                            <div class="col-md-4 mt-2 text-center" style="border: 1px solid #ccc">
+                                <img src="{{url('/')}}{{Storage::url($pizza->image)}}" class="img-thumbnail" width="100" alt="">
+                                <p>{{$pizza->name}}</p>
+                                <p>{{$pizza->description}}</p>
+                                <a href="{{ route('pizza.show', $pizza->id) }}">
+                                    <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Comprar</button>
+                                </a>
+                                
+                            </div>
+                        @empty
+                            <p>Não existe pizzas cadastradas!</p>
+                        @endforelse
+                        
                     </div>
+                    
                 </div>
             </div>
         </div>
