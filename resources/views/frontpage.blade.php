@@ -7,30 +7,40 @@
             <div class="card">
                 <div class="card-header">{{ __('Menu') }}</div>
 
-                <div class="card-body">
-                    <ul class="list-group">
-                        <a href="" class="list-group-item list-group-item-action">Categoria 1</a>
-                        <a href="" class="list-group-item list-group-item-action">Categoria 2</a>
-                        <a href="" class="list-group-item list-group-item-action">Categoria 3</a>
-                        <a href="" class="list-group-item list-group-item-action">Categoria 4</a>
-                        <a href="" class="list-group-item list-group-item-action">Categoria 5</a>
-                    </ul>
+                <div class="card-body">      
+                        <form action="{{ route('frontpage') }}" method="get">
+                            <a href="{{ url('/') }}" class="list-group-item list-group-item-action">>Todas</a>
+                            <input type="submit" value="Vegetariana" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Não Vegetariana" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Tradicional" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Frango com Catupiry" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Camarão Alho/Óleo" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Frango & Camembert" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Calabresa" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Spicy peppy paneer" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Spicy pepperoni" name="category" class="list-group-item list-group-item-action">
+                            <input type="submit" value="Vegi pepperoni" name="category" class="list-group-item list-group-item-action">
+                        </form>
+                        
                 </div>
             </div>
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Pizza') }}</div>
+                
+                <div class="card-header">{{ count($pizzas) }} Pizzas</div>
 
                 <div class="card-body">
                     <div class="row">
+                        
                         @forelse ($pizzas as $pizza)
                             <div class="col-md-4 mt-2 text-center" style="border: 1px solid #ccc">
                                 <img src="{{url('/')}}{{Storage::url($pizza->image)}}" class="img-thumbnail" width="100" alt="">
                                 <p>{{$pizza->name}}</p>
                                 <p>{{$pizza->description}}</p>
-                                <a href="{{ route('pizza.show', $pizza->id) }}">
-                                    <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Comprar</button>
+                                
+                                <a href="{{route('pizza.show',$pizza->id)}}">
+                                    <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Fazer Pedido</button>
                                 </a>
                                 
                             </div>

@@ -42,8 +42,6 @@ class PizzaController extends Controller
         $path = $request->image->store('public/pizza');
         $data = $request->all();
         $data['image'] = $path;
-               
-
         $pizza->create($data);
 
         return redirect()->route('pizza.index')->with('message', 'Pizza gravada com sucesso!');

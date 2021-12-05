@@ -19,26 +19,30 @@ use Illuminate\Support\Facades\Route;
  
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [FrontendController::class, 'index'])->name('frontpage');
-Route::get('/pizza/{id}', [FrontendController::class, 'show'])->name('pizza.show');
-Route::post('/order/store', [FrontendController::class, 'store'])->name('order.store');
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('frontpage');
+Route::get('/pizza/{id}', [App\Http\Controllers\FrontendController::class, 'show'])->name('pizza.show');
+Route::post('/order/store', [App\Http\Controllers\FrontendController::class, 'store'])->name('order.store');
 
-Route::group(['prefix'=> 'admin', 'middleware' => ['auth', 'admin']], function () {
-    
-    Route::get('/pizza', [PizzaController::class, 'index'])->name('pizza.index');
-    Route::get('/pizza/create', [PizzaController::class, 'create'])->name('pizza.create');
-    Route::post('/pizza/store', [PizzaController::class, 'store'])->name('pizza.store');
-    Route::get('/pizza/{id}/edit', [PizzaController::class, 'edit'])->name('pizza.edit');
-    Route::put('/pizza/{id}/update', [PizzaController::class, 'update'])->name('pizza.update');
-    Route::delete('/pizza/{id}/delete', [PizzaController::class, 'destroy'])->name('pizza.destroy');
 
-    //Venda de Pizzas
-    Route::get('/user/order', [UserOrderController::class, 'index'])->name('user.order');
-    Route::post('/order/{id}/status', [UserOrderController::class, 'changeStatus'])->name('order.status');
+Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
 
-    
+  Route::get('/pizza', [App\Http\Controllers\PizzaController::class, 'index'])->name('pizza.index');
+  Route::get('/pizza/create', [App\Http\Controllers\PizzaController::class, 'create'])->name('pizza.create');
+  Route::post('/pizza/store', [App\Http\Controllers\PizzaController::class, 'store'])->name('pizza.store');
+  Route::get('/pizza/{id}/edit', [App\Http\Controllers\PizzaController::class, 'edit'])->name('pizza.edit');
+  Route::put('/pizza/{id}/update', [App\Http\Controllers\PizzaController::class, 'update'])->name('pizza.update');
+  Route::delete('/pizza/{id}/delete', [App\Http\Controllers\PizzaController::class, 'destroy'])->name('pizza.destroy');
+  
+  //user order
+  Route::get('/user/order', [App\Http\Controllers\UserOrderController::class, 'index'])->name('user.order');
+  Route::post('/order/{id}/status', [App\Http\Controllers\UserOrderController::class, 'changeStatus'])->name('order.status');
+  
+  //display all customers
+  Route::get('/customers', [App\Http\Controllers\UserOrderController::class, 'customers'])->name('customers');
+
+
 });
 
 

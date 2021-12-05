@@ -8,9 +8,9 @@
                 <div class="card-header">{{ __('Menu') }}</div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <a href="{{route('pizza.index')}}" class="list-group-item list-group-action">Pizzas</a>
-                        <a href="{{route('pizza.create')}}" class="list-group-item list-group-action">Criar</a>        
-                        <a href="{{route('pizza.create')}}" class="list-group-item list-group-action">Vender</a>        
+                        <a style="float: right;" href="{{route('pizza.index')}}" class="btn btn-secondary btn-sm" style="margin-left: 5px">Listar Pizzas</a>
+                        <a style="float: right;" href="{{route('pizza.create')}}" class="btn btn-secondary btn-sm">Cadastrar Pizza</a>        
+                        
                     </ul>                     
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="card-header">
                     {{ __('Pizzas') }}
                     <a href="{{ route('pizza.create') }}">
-                        <button class="btn btn-success" style="float: right">Adiconar Pizza</button>
+                        <button class="btn btn-success" style="float: right">Cadastrar Pizza</button>
                     </a>
                 </div>
                 
