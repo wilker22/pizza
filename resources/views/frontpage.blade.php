@@ -9,7 +9,7 @@
 
                 <div class="card-body">      
                         <form action="{{ route('frontpage') }}" method="get">
-                            <a href="{{ url('/') }}" class="list-group-item list-group-item-action">>Todas</a>
+                            <a href="{{ url('/') }}" class="list-group-item list-group-item-action">Todas</a>
                             <input type="submit" value="Vegetariana" name="category" class="list-group-item list-group-item-action">
                             <input type="submit" value="Não Vegetariana" name="category" class="list-group-item list-group-item-action">
                             <input type="submit" value="Tradicional" name="category" class="list-group-item list-group-item-action">

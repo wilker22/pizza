@@ -61,7 +61,7 @@
                     <p>
                     <h3>{{ $pizza->description }} </h3>
                     </p>
-                    <p class="badge badge-success">Vegetarian</p>
+                    <p class="badge badge-success">{{$pizza->category}}</p>
                     <p class="lead">Pequena:R${{ $pizza->small_pizza_price }}</p>
                     <p class="lead">Médi:R${{ $pizza->medium_pizza_price }}</p>
                     <p class="lead">Grande:R${{ $pizza->large_pizza_price }}</p>
